@@ -11,7 +11,7 @@ class Like extends Component {
       <div>
         <FontAwesomeIcon
           onClick={this.props.onClick}
-          icon={this.props.liked == true ? faHeartSolid : faHeartRegular}
+          icon={this.props.liked === true ? faHeartSolid : faHeartRegular}
         />
       </div>
     );

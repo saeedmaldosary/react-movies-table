@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { getMovies, deleteMovie } from "../services/fakeMovieService";
 import Like from "./Like";
+import Pagination from "./Pagination";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
+    pageSize: 4,
+    currentPage: 1,
   };
+
   render() {
     return (
       <div className="container p-2">
@@ -23,6 +27,12 @@ class Movies extends Component {
           </thead>
           {this.getMoviesList()}
         </table>
+        <Pagination
+          itemsLength={this.state.movies.length}
+          pageSize={this.state.pageSize}
+          onPageChange={this.handlePageChange}
+          currentPage={this.state.currentPage}
+        />
       </div>
     );
   }
@@ -38,8 +48,8 @@ class Movies extends Component {
     var movies = this.state.movies;
     const index = this.state.movies.indexOf(movie);
     if (
-      this.state.movies[index].liked == undefined ||
-      this.state.movies[index].liked == false
+      this.state.movies[index].liked === undefined ||
+      this.state.movies[index].liked === false
     )
       this.state.movies[index].liked = true;
     else this.state.movies[index].liked = false;
@@ -47,10 +57,22 @@ class Movies extends Component {
     this.setState({ movies: movies });
   };
 
+  handlePageChange = (page) => {
+    this.setState({
+      currentPage: page,
+    });
+  };
+
   getMoviesList() {
+    const indexOfLastMovie = this.state.currentPage * this.state.pageSize;
+    const indexOfFirstMovie = indexOfLastMovie - this.state.pageSize;
+    const currentMovies = this.state.movies.slice(
+      indexOfFirstMovie,
+      indexOfLastMovie
+    );
     return (
       <tbody>
-        {this.state.movies.map((movie) => (
+        {currentMovies.map((movie) => (
           <tr key={movie._id}>
             <th>{movie.title}</th>
             <th>{movie.genre.name}</th>
