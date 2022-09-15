@@ -9,8 +9,8 @@ class Movies extends Component {
   state = {
     movies: getMovies(),
     genres: getGenres(),
-    currentGenre: "",
-    pageSize: 2,
+    currentGenre: "All Genres",
+    pageSize: 4,
     currentPage: 1,
   };
 
@@ -63,14 +63,11 @@ class Movies extends Component {
 
   handleLike = (movie) => {
     var movies = this.state.movies;
-    const index = this.state.movies.indexOf(movie);
-    if (
-      this.state.movies[index].liked === undefined ||
-      this.state.movies[index].liked === false
-    ) {
-      this.state.movies[index].liked = true;
+    const index = movies.indexOf(movie);
+    if (movies[index].liked === undefined || movies[index].liked === false) {
+      movies[index].liked = true;
     } else {
-      this.state.movies[index].liked = false;
+      movies[index].liked = false;
     }
 
     this.setState({ movies: movies });
@@ -86,9 +83,9 @@ class Movies extends Component {
     var movies = getMovies();
     var moviesSelectedGenre = movies.filter((m) => m.genre.name === genre);
     this.setState({
-      movies: moviesSelectedGenre,
+      movies: genre === "All Genres" ? movies : moviesSelectedGenre,
       currentGenre: genre,
-      currentPage: 1
+      currentPage: 1,
     });
   };
 
