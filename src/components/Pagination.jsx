@@ -18,7 +18,7 @@ class Pagination extends Component {
           <li
             key={number}
             className={
-              number == this.props.currentPage
+              number === this.props.currentPage
                 ? "page-item active"
                 : "page-item"
             }

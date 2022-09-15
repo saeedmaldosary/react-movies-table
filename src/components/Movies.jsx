@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { getMovies, deleteMovie } from "../services/fakeMovieService";
+import { getGenres } from "../services/fakeGenreService";
 import Like from "./Like";
 import Pagination from "./Pagination";
+import ListGroup from "./ListGroup";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
+    genres: getGenres(),
+    currentGenre: "",
     pageSize: 4,
     currentPage: 1,
   };
@@ -14,25 +18,38 @@ class Movies extends Component {
     return (
       <div className="container p-2">
         <p>{this.displayTitle()}</p>
-        <table className={this.state.movies.length > 0 ? "table" : "d-none"}>
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Genre</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Rate</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          {this.getMoviesList()}
-        </table>
-        <Pagination
-          itemsLength={this.state.movies.length}
-          pageSize={this.state.pageSize}
-          onPageChange={this.handlePageChange}
-          currentPage={this.state.currentPage}
-        />
+        <div className="row">
+          <div className="col-md-2 col-sm-6 mt-4">
+            <ListGroup
+              onChangeGenre={this.handleGenre}
+              genres={this.state.genres}
+              currentGenre={this.state.currentGenre}
+            />
+          </div>
+          <div className="col-md-10 col-sm-6">
+            <table
+              className={this.state.movies.length > 0 ? "table" : "d-none"}
+            >
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Genre</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Rate</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              {this.getMoviesList()}
+            </table>
+            <Pagination
+              itemsLength={this.state.movies.length}
+              pageSize={this.state.pageSize}
+              onPageChange={this.handlePageChange}
+              currentPage={this.state.currentPage}
+            />
+          </div>
+        </div>
       </div>
     );
   }
@@ -50,9 +67,11 @@ class Movies extends Component {
     if (
       this.state.movies[index].liked === undefined ||
       this.state.movies[index].liked === false
-    )
+    ) {
       this.state.movies[index].liked = true;
-    else this.state.movies[index].liked = false;
+    } else {
+      this.state.movies[index].liked = false;
+    }
 
     this.setState({ movies: movies });
   };
@@ -60,6 +79,17 @@ class Movies extends Component {
   handlePageChange = (page) => {
     this.setState({
       currentPage: page,
+    });
+  };
+
+  handleGenre = (genre) => {
+    var movies = getMovies();
+    var moviesSelectedGenre = movies.filter((m) => m.genre.name === genre);
+    this.setState({
+      currentGenre: genre,
+    });
+    this.setState({
+      movies: moviesSelectedGenre,
     });
   };
 
