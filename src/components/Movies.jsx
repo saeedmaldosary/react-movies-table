@@ -86,10 +86,8 @@ class Movies extends Component {
     var movies = getMovies();
     var moviesSelectedGenre = movies.filter((m) => m.genre.name === genre);
     this.setState({
-      currentGenre: genre,
-    });
-    this.setState({
       movies: moviesSelectedGenre,
+      currentGenre: genre,
     });
   };
 
@@ -131,6 +129,10 @@ class Movies extends Component {
   deleteMovieList = (movieID) => {
     deleteMovie(movieID);
     this.setState({ movies: getMovies() });
+    var { currentGenre } = this.state;
+    if (currentGenre) {
+      this.handleGenre(currentGenre);
+    }
   };
 }
 
