@@ -7,11 +7,12 @@ class Like extends Component {
   state = {};
 
   render() {
+    var { onClick, liked } = this.props;
     return (
       <div>
         <FontAwesomeIcon
-          onClick={this.props.onClick}
-          icon={this.props.liked === true ? faHeartSolid : faHeartRegular}
+          onClick={onClick}
+          icon={liked === true ? faHeartSolid : faHeartRegular}
         />
       </div>
     );

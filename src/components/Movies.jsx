@@ -15,6 +15,9 @@ class Movies extends Component {
   };
 
   render() {
+    var { genres, currentGenre, movies, currentPage, pageSize } = this.state;
+    var genresName = genres.map((g) => g.name);
+    var genresId = genres.map((g) => g._id);
     return (
       <div className="container p-2">
         <p>{this.displayTitle()}</p>
@@ -22,14 +25,13 @@ class Movies extends Component {
           <div className="col-md-2 col-sm-6 mt-4">
             <ListGroup
               onChangeGenre={this.handleGenre}
-              genres={this.state.genres}
-              currentGenre={this.state.currentGenre}
+              genres={genresName}
+              genresId={genresId}
+              currentGenre={currentGenre}
             />
           </div>
           <div className="col-md-10 col-sm-6">
-            <table
-              className={this.state.movies.length > 0 ? "table" : "d-none"}
-            >
+            <table className={movies.length > 0 ? "table" : "d-none"}>
               <thead>
                 <tr>
                   <th scope="col">Title</th>
@@ -43,10 +45,10 @@ class Movies extends Component {
               {this.getMoviesList()}
             </table>
             <Pagination
-              itemsLength={this.state.movies.length}
-              pageSize={this.state.pageSize}
+              itemsLength={movies.length}
+              pageSize={pageSize}
               onPageChange={this.handlePageChange}
-              currentPage={this.state.currentPage}
+              currentPage={currentPage}
             />
           </div>
         </div>
@@ -90,12 +92,10 @@ class Movies extends Component {
   };
 
   getMoviesList() {
-    const indexOfLastMovie = this.state.currentPage * this.state.pageSize;
-    const indexOfFirstMovie = indexOfLastMovie - this.state.pageSize;
-    const currentMovies = this.state.movies.slice(
-      indexOfFirstMovie,
-      indexOfLastMovie
-    );
+    var { currentPage, pageSize, movies } = this.state;
+    const indexOfLastMovie = currentPage * pageSize;
+    const indexOfFirstMovie = indexOfLastMovie - pageSize;
+    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
     return (
       <tbody>
         {currentMovies.map((movie) => (

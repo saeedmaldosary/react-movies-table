@@ -3,24 +3,23 @@ import React, { Component } from "react";
 class ListGroup extends Component {
   state = {};
   render() {
-    var genres = [
-      { name: "All Genres", _id: "5b21ca3eeb7f6fbccd411216" },
-      ...this.props.genres,
-    ];
+    var { genres, currentGenre, onChangeGenre, genresId } = this.props;
+    genres.unshift("All Genres");
+    genresId.unshift("5b21ca3eeb7f6fbccd471821");
     return (
       <div>
         <ul className="list-group">
-          {genres.map((genre) => (
+          {genres.map((genre, index) => (
             <li
-              key={genre._id}
-              onClick={() => this.props.onChangeGenre(genre.name)}
+              key={genresId[index]}
+              onClick={() => onChangeGenre(genre)}
               className={
-                this.props.currentGenre === genre.name
+                currentGenre === genre
                   ? "list-group-item active"
                   : "list-group-item"
               }
             >
-              {genre.name}
+              {genre}
             </li>
           ))}
         </ul>

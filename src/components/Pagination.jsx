@@ -11,6 +11,7 @@ class Pagination extends Component {
   }
 
   getPagesNumbers = () => {
+    var { currentPage, onPageChange } = this.props;
     var pageNumbers = this.calculatePageNumbers();
     return (
       <ul className="pagination">
@@ -18,14 +19,13 @@ class Pagination extends Component {
           <li
             key={number}
             className={
-              number === this.props.currentPage
-                ? "page-item active"
-                : "page-item"
+              number === currentPage ? "page-item active" : "page-item"
             }
           >
             <a
               className="page-link"
-              onClick={() => this.props.onPageChange(number)}
+              href={"#" + number}
+              onClick={() => onPageChange(number)}
             >
               {number}
             </a>
@@ -37,11 +37,8 @@ class Pagination extends Component {
 
   calculatePageNumbers = () => {
     const pageNumbers = [];
-    for (
-      let i = 1;
-      i <= Math.ceil(this.props.itemsLength / this.props.pageSize);
-      i++
-    ) {
+    var { itemsLength, pageSize } = this.props;
+    for (let i = 1; i <= Math.ceil(itemsLength / pageSize); i++) {
       pageNumbers.push(i);
     }
     return pageNumbers;
