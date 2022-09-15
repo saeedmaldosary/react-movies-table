@@ -18,9 +18,7 @@ class Pagination extends Component {
         {pageNumbers.map((number) => (
           <li
             key={number}
-            className={
-              number === currentPage ? "page-item active" : "page-item"
-            }
+            className={"page-item" + (number === currentPage ? " active" : "")}
           >
             <a
               className="page-link"

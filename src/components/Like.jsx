@@ -12,6 +12,7 @@ class Like extends Component {
       <div>
         <FontAwesomeIcon
           onClick={onClick}
+          role="button"
           icon={liked === true ? faHeartSolid : faHeartRegular}
         />
       </div>

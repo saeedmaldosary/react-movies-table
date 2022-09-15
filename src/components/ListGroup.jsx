@@ -4,19 +4,20 @@ class ListGroup extends Component {
   state = {};
   render() {
     var { genres, currentGenre, onChangeGenre, genresId } = this.props;
-    genres.unshift("All Genres");
-    genresId.unshift("5b21ca3eeb7f6fbccd471821");
+    if (!genres.includes("All Genres")) {
+      genres.unshift("All Genres");
+      genresId.unshift("5b21ca3eeb7f6fbccd471821");
+    }
     return (
       <div>
         <ul className="list-group">
           {genres.map((genre, index) => (
             <li
+              role="button"
               key={genresId[index]}
               onClick={() => onChangeGenre(genre)}
               className={
-                currentGenre === genre
-                  ? "list-group-item active"
-                  : "list-group-item"
+                "list-group-item" + (currentGenre === genre ? " active" : "")
               }
             >
               {genre}
