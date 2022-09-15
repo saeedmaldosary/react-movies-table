@@ -10,7 +10,7 @@ class Movies extends Component {
     movies: getMovies(),
     genres: getGenres(),
     currentGenre: "",
-    pageSize: 4,
+    pageSize: 2,
     currentPage: 1,
   };
 
@@ -88,6 +88,7 @@ class Movies extends Component {
     this.setState({
       movies: moviesSelectedGenre,
       currentGenre: genre,
+      currentPage: 1
     });
   };
 
@@ -128,10 +129,11 @@ class Movies extends Component {
 
   deleteMovieList = (movieID) => {
     deleteMovie(movieID);
-    this.setState({ movies: getMovies() });
     var { currentGenre } = this.state;
     if (currentGenre) {
       this.handleGenre(currentGenre);
+    } else {
+      this.setState({ movies: getMovies() });
     }
   };
 }
