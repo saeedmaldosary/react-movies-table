@@ -12,6 +12,8 @@ class Movies extends Component {
     currentGenre: "All Genres",
     pageSize: 4,
     currentPage: 1,
+    orderDesc: false,
+    sortedTitle: "",
   };
 
   render() {
@@ -37,6 +39,7 @@ class Movies extends Component {
               pageSize={pageSize}
               onDeleteMovieList={this.deleteMovieList}
               onLike={this.handleLike}
+              onSort={this.handleSort}
             />
             <Pagination
               itemsLength={movies.length}
@@ -69,30 +72,51 @@ class Movies extends Component {
     this.setState({ movies: movies });
   };
 
+  handleSort = (title, subTitle) => {
+    var { orderDesc, sortedTitle, currentGenre, movies } = this.state;
+    if (title === sortedTitle && orderDesc) {
+      this.setState({
+        movies: movies.reverse(),
+        sortedTitle: title,
+        orderDesc: false,
+      });
+    } else {
+      this.handleGenre(currentGenre);
+      var sortedMovies = movies.sort(function (a, b) {
+        return subTitle
+          ? a[title][subTitle] >= b[title][subTitle]
+          : a[title] >= b[title]
+          ? -1
+          : 1;
+      });
+      this.setState({
+        movies: sortedMovies,
+        sortedTitle: title,
+        orderDesc: true,
+      });
+    }
+  };
+
   handlePageChange = (page) => {
     this.setState({
       currentPage: page,
     });
   };
 
-  handleGenre = (genre) => {
+  handleGenre = (genre, movieDeleted) => {
+    var { currentPage, currentGenre } = this.state;
     var movies = getMovies();
     var moviesSelectedGenre = movies.filter((m) => m.genre.name === genre);
     this.setState({
       movies: genre === "All Genres" ? movies : moviesSelectedGenre,
       currentGenre: genre,
-      currentPage: 1,
+      currentPage: movieDeleted ? 1 : genre === currentGenre ? currentPage : 1,
     });
   };
 
   deleteMovieList = (movieID) => {
     deleteMovie(movieID);
-    var { currentGenre } = this.state;
-    if (currentGenre) {
-      this.handleGenre(currentGenre);
-    } else {
-      this.setState({ movies: getMovies() });
-    }
+    this.handleGenre(this.state.currentGenre, true);
   };
 }
 
