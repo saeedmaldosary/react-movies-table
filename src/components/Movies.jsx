@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { getMovies, deleteMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
-import Like from "./Like";
-import Pagination from "./Pagination";
-import ListGroup from "./ListGroup";
+import Pagination from "./common/Pagination";
+import MovieTable from "./MovieTable";
+import ListGroup from "./common/ListGroup";
 
 class Movies extends Component {
   state = {
@@ -31,19 +31,13 @@ class Movies extends Component {
             />
           </div>
           <div className="col-md-10 col-sm-6">
-            <table className={movies.length > 0 ? "table" : "d-none"}>
-              <thead>
-                <tr>
-                  <th scope="col">Title</th>
-                  <th scope="col">Genre</th>
-                  <th scope="col">Stock</th>
-                  <th scope="col">Rate</th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              {this.getMoviesList()}
-            </table>
+            <MovieTable
+              movies={movies}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              onDeleteMovieList={this.deleteMovieList}
+              onLike={this.handleLike}
+            />
             <Pagination
               itemsLength={movies.length}
               pageSize={pageSize}
@@ -90,39 +84,6 @@ class Movies extends Component {
       currentPage: 1,
     });
   };
-
-  getMoviesList() {
-    var { currentPage, pageSize, movies } = this.state;
-    const indexOfLastMovie = currentPage * pageSize;
-    const indexOfFirstMovie = indexOfLastMovie - pageSize;
-    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
-    return (
-      <tbody>
-        {currentMovies.map((movie) => (
-          <tr key={movie._id}>
-            <th>{movie.title}</th>
-            <th>{movie.genre.name}</th>
-            <th>{movie.numberInStock}</th>
-            <th>{movie.dailyRentalRate}</th>
-            <th>
-              <Like
-                liked={movie.liked}
-                onClick={() => this.handleLike(movie)}
-              />
-            </th>
-            <th>
-              <button
-                onClick={() => this.deleteMovieList(movie._id)}
-                className="btn btn-danger btn-sm"
-              >
-                Delete
-              </button>
-            </th>
-          </tr>
-        ))}
-      </tbody>
-    );
-  }
 
   deleteMovieList = (movieID) => {
     deleteMovie(movieID);
