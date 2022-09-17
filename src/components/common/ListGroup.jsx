@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 
 class ListGroup extends Component {
-  state = {};
   render() {
     var { genres, currentGenre, onChangeGenre, genresId } = this.props;
     if (!genres.includes("All Genres")) {
       genres.unshift("All Genres");
-      genresId.unshift("5b21ca3eeb7f6fbccd471821");
+      genresId.unshift("");
     }
     return (
       <div>

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { getMovies, deleteMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
-import Pagination from "./common/Pagination";
-import MovieTable from "./MovieTable";
-import ListGroup from "./common/ListGroup";
+import Pagination from "./common/pagination";
+import MovieTable from "./movieTable";
+import ListGroup from "./common/listGroup";
 
 class Movies extends Component {
   state = {
@@ -40,6 +40,8 @@ class Movies extends Component {
               onDeleteMovieList={this.deleteMovieList}
               onLike={this.handleLike}
               onSort={this.handleSort}
+              onChangeGenre={this.handleGenre}
+              currentGenre={currentGenre}
             />
             <Pagination
               itemsLength={movies.length}
@@ -72,29 +74,10 @@ class Movies extends Component {
     this.setState({ movies: movies });
   };
 
-  handleSort = (title, subTitle) => {
-    var { orderDesc, sortedTitle, currentGenre, movies } = this.state;
-    if (title === sortedTitle && orderDesc) {
-      this.setState({
-        movies: movies.reverse(),
-        sortedTitle: title,
-        orderDesc: false,
-      });
-    } else {
-      this.handleGenre(currentGenre);
-      var sortedMovies = movies.sort(function (a, b) {
-        return subTitle
-          ? a[title][subTitle] >= b[title][subTitle]
-          : a[title] >= b[title]
-          ? -1
-          : 1;
-      });
-      this.setState({
-        movies: sortedMovies,
-        sortedTitle: title,
-        orderDesc: true,
-      });
-    }
+  handleSort = (movies) => {
+    this.setState({
+      movies: movies,
+    });
   };
 
   handlePageChange = (page) => {

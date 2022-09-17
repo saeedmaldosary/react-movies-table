@@ -10,6 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Sorting
 - Responsive UI.
 - Destructuring Arguments
+- Functional components
 
 ## Project setup
 

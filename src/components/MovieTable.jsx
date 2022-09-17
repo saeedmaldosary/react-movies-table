@@ -1,44 +1,41 @@
 import React from "react";
-import Like from "./common/Like";
+import Like from "./common/like";
+import TableHeader from "./common/tableHeader";
 
 const MovieTable = (props) => {
-  var { movies, currentPage, pageSize, onDeleteMovieList, onLike, onSort } =
-    props;
+  var tableColumns = [
+    { title: "Title", name: "title" },
+    { title: "Genre", name: "genre.name" },
+    { title: "Stock", name: "numberInStock" },
+    { title: "Rate", name: "dailyRentalRate" },
+    { title: "", name: "like" },
+    { title: "", name: "delete" },
+  ];
+  var {
+    movies,
+    currentPage,
+    pageSize,
+    onDeleteMovieList,
+    onLike,
+    onSort,
+    onChangeGenre,
+    currentGenre,
+  } = props;
   const indexOfLastMovie = currentPage * pageSize;
   const indexOfFirstMovie = indexOfLastMovie - pageSize;
   const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+
   return (
     <div>
       <table className={movies.length > 0 ? "table" : "d-none"}>
         <thead>
-          <tr>
-            <th role="button" onClick={() => onSort("title")} scope="col">
-              Title
-            </th>
-            <th
-              role="button"
-              onClick={() => onSort("genre", "name")}
-              scope="col"
-            >
-              Genre
-            </th>
-            <th
-              role="button"
-              onClick={() => onSort("numberInStock")}
-              scope="col"
-            >
-              Stock
-            </th>
-            <th
-              role="button"
-              onClick={() => onSort("dailyRentalRate")}
-              scope="col"
-            >
-              Rate
-            </th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
+          <TableHeader
+            columns={tableColumns}
+            data={movies}
+            onChangeGenre={onChangeGenre}
+            currentGenre={currentGenre}
+            onSort={onSort}
+          />
         </thead>
         <tbody>
           {currentMovies.map((movie) => (
