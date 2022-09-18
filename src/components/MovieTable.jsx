@@ -1,11 +1,11 @@
 import React from "react";
-import Like from "./common/like";
 import TableHeader from "./common/tableHeader";
+import TableBody from "./common/tableBody";
 
 const MovieTable = (props) => {
   var tableColumns = [
     { title: "Title", name: "title" },
-    { title: "Genre", name: "genre.name" },
+    { title: "Genre", name: "genre.name", subName: "name" },
     { title: "Stock", name: "numberInStock" },
     { title: "Rate", name: "dailyRentalRate" },
     { title: "", name: "like" },
@@ -32,31 +32,18 @@ const MovieTable = (props) => {
           <TableHeader
             columns={tableColumns}
             data={movies}
+            onSort={onSort}
             onChangeGenre={onChangeGenre}
             currentGenre={currentGenre}
-            onSort={onSort}
           />
         </thead>
         <tbody>
-          {currentMovies.map((movie) => (
-            <tr key={movie._id}>
-              <th>{movie.title}</th>
-              <th>{movie.genre.name}</th>
-              <th>{movie.numberInStock}</th>
-              <th>{movie.dailyRentalRate}</th>
-              <th>
-                <Like liked={movie.liked} onClick={() => onLike(movie)} />
-              </th>
-              <th>
-                <button
-                  onClick={() => onDeleteMovieList(movie._id)}
-                  className="btn btn-danger btn-sm"
-                >
-                  Delete
-                </button>
-              </th>
-            </tr>
-          ))}
+          <TableBody
+            columns={tableColumns}
+            data={currentMovies}
+            onLike={onLike}
+            onDelete={onDeleteMovieList}
+          />
         </tbody>
       </table>
     </div>
