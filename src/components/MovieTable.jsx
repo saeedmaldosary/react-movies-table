@@ -1,6 +1,5 @@
 import React from "react";
-import TableHeader from "./common/tableHeader";
-import TableBody from "./common/tableBody";
+import Table from "./common/table";
 
 const MovieTable = (props) => {
   var tableColumns = [
@@ -21,31 +20,23 @@ const MovieTable = (props) => {
     onChangeGenre,
     currentGenre,
   } = props;
+
   const indexOfLastMovie = currentPage * pageSize;
   const indexOfFirstMovie = indexOfLastMovie - pageSize;
   const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
   return (
     <div>
-      <table className={movies.length > 0 ? "table" : "d-none"}>
-        <thead>
-          <TableHeader
-            columns={tableColumns}
-            data={movies}
-            onSort={onSort}
-            onChangeGenre={onChangeGenre}
-            currentGenre={currentGenre}
-          />
-        </thead>
-        <tbody>
-          <TableBody
-            columns={tableColumns}
-            data={currentMovies}
-            onLike={onLike}
-            onDelete={onDeleteMovieList}
-          />
-        </tbody>
-      </table>
+      <Table
+        data={movies}
+        currentData={currentMovies}
+        tableColumns={tableColumns}
+        onSort={onSort}
+        onChangeGenre={onChangeGenre}
+        currentGenre={currentGenre}
+        onLike={onLike}
+        onDeleteMovieList={onDeleteMovieList}
+      />
     </div>
   );
 };
