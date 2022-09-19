@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowAltCircleUp,
+  faArrowAltCircleDown,
+} from "@fortawesome/free-regular-svg-icons";
 
 class TableHeader extends Component {
   state = {
@@ -11,12 +16,26 @@ class TableHeader extends Component {
       <tr>
         {columns.map((c) => (
           <th key={c.name} onClick={() => this.handleSort(c.name)}>
-            {c.title}
+            <div className="row">
+              <div className="col-md-8">{c.title}</div>
+              <div className="col-md-4">{this.sortIcon(c)}</div>
+            </div>
           </th>
         ))}
       </tr>
     );
   }
+
+  sortIcon = (column) => {
+    var { sortedTitle, orderDesc } = this.state;
+    if (sortedTitle === column.name) {
+      return (
+        <FontAwesomeIcon
+          icon={orderDesc === false ? faArrowAltCircleDown : faArrowAltCircleUp}
+        />
+      );
+    }
+  };
 
   handleSort = (title) => {
     var { orderDesc, sortedTitle } = this.state;
