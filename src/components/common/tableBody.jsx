@@ -43,6 +43,7 @@ class TableBody extends Component {
       return (
         <td key={key}>
           <Link
+            state={{ movieId: data._id }}
             style={{ textDecoration: "none", color: "#0d6efd" }}
             to={`/movies/${data._id}`}
           >
