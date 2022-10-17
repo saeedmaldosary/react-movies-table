@@ -11,6 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Responsive UI.
 - Destructuring Arguments
 - Functional components
+- Router (Redirect, Notfound, pass prop)
 
 ## Project setup
 
