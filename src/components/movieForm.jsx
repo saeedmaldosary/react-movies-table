@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const MovieDetails = () => {
+const MovieForm = () => {
   const navigate = useNavigate();
   return (
     <div className="m-3">
@@ -20,4 +20,4 @@ const MovieDetails = () => {
   }
 };
 
-export default MovieDetails;
+export default MovieForm;

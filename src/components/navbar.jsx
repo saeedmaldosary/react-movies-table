@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 class Navbar extends Component {
   state = {};
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           Vidly
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
