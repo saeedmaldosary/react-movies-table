@@ -7,11 +7,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## App Features ✨
 
 - Pagination technique.
-- Sorting
+- Sorting.
 - Responsive UI.
-- Destructuring Arguments
-- Functional components
-- Router (Redirect, Notfound, pass prop)
+- Destructuring Arguments.
+- Functional components.
+- Router (Redirect, Notfound, Pass prop)
 
 ## Project setup
 
