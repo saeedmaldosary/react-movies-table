@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/52779920/190687435-cf0b9753-cda8-4fb6-b714-de2055b09c35.png)
+![image](https://user-images.githubusercontent.com/52779920/196148475-bbb2c3c1-f171-4395-a4e8-5e8f52c69d47.png)
 
 # React Movies table
 
@@ -7,10 +7,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## App Features ✨
 
 - Pagination technique.
-- Sorting
+- Sorting.
 - Responsive UI.
-- Destructuring Arguments
-- Functional components
+- Destructuring Arguments.
+- Functional components.
+- Router (Redirect, Notfound, Pass prop).
 
 ## Project setup
 
