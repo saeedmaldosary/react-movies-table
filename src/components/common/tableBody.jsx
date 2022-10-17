@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Like from "./like";
 
 class TableBody extends Component {
@@ -36,6 +37,17 @@ class TableBody extends Component {
           >
             Delete
           </button>
+        </td>
+      );
+    } else if (column.name === "title") {
+      return (
+        <td key={key}>
+          <Link
+            style={{ textDecoration: "none", color: "#0d6efd" }}
+            to={`/movies/${data._id}`}
+          >
+            {data[column.name]}
+          </Link>
         </td>
       );
     } else {
