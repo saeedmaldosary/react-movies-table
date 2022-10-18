@@ -24,7 +24,7 @@ class Movies extends Component {
       <div className="container p-2">
         <p>{this.displayTitle()}</p>
         <div className="row">
-          <div className="col-md-2 col-sm-6 mt-4">
+          <div className="col-md-2 col-sm-6 col-xs-10 mb-4">
             <ListGroup
               onChangeGenre={this.handleGenre}
               genres={genresName}
@@ -32,7 +32,7 @@ class Movies extends Component {
               currentGenre={currentGenre}
             />
           </div>
-          <div className="col-md-10 col-sm-6">
+          <div className="col-md-10 col-sm-6 col-xs-2">
             <MovieTable
               movies={movies}
               currentPage={currentPage}

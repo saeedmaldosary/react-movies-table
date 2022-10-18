@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import Navbar from "./components/navbar";
+import Menu from "./components/menu";
 import Movies from "./components/movies";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
@@ -9,7 +9,7 @@ import MovieForm from "./components/movieForm";
 function App() {
   return (
     <main>
-      <Navbar />
+      <Menu />
       <div>
         <Routes>
           <Route path="*" element={<Notfound />} />
