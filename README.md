@@ -14,7 +14,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Destructuring Arguments.
 - Functional components.
 - Router (Redirect, Notfound, Pass prop).
-- Bind input data
+- Bind inputs data.
 
 ## Project setup
 
