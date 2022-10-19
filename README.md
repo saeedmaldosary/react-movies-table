@@ -1,5 +1,8 @@
 ![image](https://user-images.githubusercontent.com/52779920/196148475-bbb2c3c1-f171-4395-a4e8-5e8f52c69d47.png)
 
+![image](https://user-images.githubusercontent.com/52779920/196488622-eaaec8d3-e3ec-4752-aad8-b13c7eccbe5e.png)
+
+
 # React Movies table
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
