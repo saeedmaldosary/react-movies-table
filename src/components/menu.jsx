@@ -22,6 +22,9 @@ function menu() {
             <Nav.Link as={NavLink} to="/rentals">
               Rentals
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/login">
+              Login
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -5,17 +5,19 @@ import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import Notfound from "./components/notfound";
 import MovieForm from "./components/movieForm";
+import LoginForm from "./components/loginForm";
 
 function App() {
   return (
     <main>
       <Menu />
-      <div>
+      <div className="container">
         <Routes>
           <Route path="*" element={<Notfound />} />
           <Route path="/" element={<Navigate to="/movies" />} />
           <Route path="/movies/:id" element={<MovieForm />} />
           <Route path="/movies" element={<Movies />} />
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/rentals" element={<Rentals />} />
         </Routes>
