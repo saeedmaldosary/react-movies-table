@@ -2,8 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/52779920/196488622-eaaec8d3-e3ec-4752-aad8-b13c7eccbe5e.png)
 
-
-# React Movies table
+# React Vidly
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -15,6 +14,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Destructuring Arguments.
 - Functional components.
 - Router (Redirect, Notfound, Pass prop).
+- Bind input data
 
 ## Project setup
 
