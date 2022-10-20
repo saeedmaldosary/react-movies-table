@@ -4,6 +4,7 @@ import Input from "./common/input";
 class LoginForm extends Component {
   state = {
     account: { username: "", password: "" },
+    errors: {},
   };
 
   handleChange = (e) => {
@@ -12,15 +13,32 @@ class LoginForm extends Component {
     this.setState({ account });
   };
 
+  validate = () => {
+    const errors = {};
+
+    if (this.state.account.username.trim() === "")
+      errors.username = "Username is required.";
+    if (this.state.account.password.trim() === "")
+      errors.password = "Password is required.";
+
+    return errors.password || errors.username ? errors : null;
+  };
+
   handleSubmit = (e) => {
     // prevent reload the page
     e.preventDefault();
 
-    console.log("Hello");
+    const errors = this.validate();
+    this.setState({ errors: errors || {} });
+    if (errors) {
+      return;
+    }
+
+    console.log("Login successfully.");
   };
 
   render() {
-    const { account } = this.state;
+    const { account, errors } = this.state;
     return (
       <div>
         <h1>Login</h1>
@@ -31,6 +49,7 @@ class LoginForm extends Component {
             label="Username"
             onChange={this.handleChange}
             type="text"
+            error={errors.username}
           />
           <Input
             class="mb-2"
@@ -39,6 +58,7 @@ class LoginForm extends Component {
             label="Password"
             onChange={this.handleChange}
             type="password"
+            error={errors.password}
           />
           <button className="btn btn-primary">Login</button>
         </form>

@@ -14,6 +14,7 @@ const Input = (props) => {
         type={props.type}
         className="form-control"
       />
+      {props.error && <div className="alert alert-danger">{props.error}</div>}
     </div>
   );
 };
